@@ -1,0 +1,1140 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\use_default_options true
+\begin_modules
+theorems-ams
+\end_modules
+\maintain_unincluded_children false
+\language english
+\language_package auto
+\inputencoding auto
+\fontencoding global
+\font_roman "default" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Section
+Introducción
+\end_layout
+
+\begin_layout Standard
+
+\size footnotesize
+Para conocer la complejidad de un algoritmo y compararlo con la de otros,
+ es necesario establecer una serie de definiciones y reglas que hagan a
+ la competencia justa.
+ Es necesario, por ejemplo, definir en qué consiste la unidad de medida
+ para la complejidad.
+ Y establecer cuál es el campo sobre el cual se analiza la complejidad,
+ que por ejemplo puede referirse a el uso de memoria o a el tiempo de ejecución.
+\end_layout
+
+\begin_layout Standard
+
+\size footnotesize
+En ésta clase se establecerán ésas definiciones y se explorará la reciente
+ historia de su desarrollo, junto a un vistazo de su teoría.
+\end_layout
+
+\begin_layout Section
+Definiciones
+\end_layout
+
+\begin_layout Subsection
+Definiciones en lenguaje natural
+\end_layout
+
+\begin_layout Standard
+Para poder introducir el concepto de la computación eficiente, podemos comenzar
+ por establecer una serie de definiciones útiles.
+ 
+\begin_inset Newline newline
+\end_inset
+
+ Podemos comenzar por la definición de eficiencia.
+ Una definición general sería: “La capacidad de conseguir un efecto deseado
+ con el mínimo de recursos posibles.” 
+\begin_inset Newline newline
+\end_inset
+
+ En el área de las ciencias de computación, cuando nos referimos a recursos
+ hablamos de eficiencia en el uso de memoria y eficiencia en el uso del
+ tiempo de ejecución.
+ “Utilizar la menor cantidad de recursos para la computación de un algoritmo.”
+ 
+\begin_inset Newline newline
+\end_inset
+
+ Para el primer caso hablamos de eficiencia de memoria, y para el segundo
+ de eficiencia temporal, dado que la cantidad de tiempo utilizado por el
+ computador va a ser directamente proporcional a la cantidad de instrucciones
+ a ejecutar.
+ 
+\begin_inset Newline newline
+\end_inset
+
+ Finalmente tenemos la definición de algoritmo, que puede ser definido como
+ una receta, una secuencia de instrucciones que obedecidas proveen un resultado
+ determinado.
+ Un algoritmo es un conjunto de pasos determinados que se estructuran en
+ el tiempo que responden a una lista de reglas claras y que tienen como
+ objetivo solucionar un problema particular.
+\end_layout
+
+\begin_layout Subsection
+Formalización de las definiciones
+\end_layout
+
+\begin_layout Standard
+Eficiencia posee definiciones que provienen del sentido común, la intuición.
+\begin_inset Newline newline
+\end_inset
+
+ Algoritmo posee definiciones formalizadas por matemáticos durante el siglo
+ XX.
+\begin_inset Newline newline
+\end_inset
+
+ Hasta ahora hemos explorado las definiciones más intuitivas de ambos, pero
+ para poder incursionar en el cálculo de complejidad computacional va a
+ ser necesario definir algoritmo con mayor especificidad.
+\end_layout
+
+\begin_layout Subsubsection*
+Sobre la formalización de la definición de algoritmo
+\end_layout
+
+\begin_layout Standard
+Ésta sección va a dar un breve repaso histórico donde se van a mencionar
+ los mayores participantes de su formalización.
+ La historia, que termina con la equivalencia entre las definiciones formales
+ de algoritmo, permite justificar el uso de las Máquinas de Turing como
+ estándar para el desarrollo de cualquier algoritmo existente.
+\end_layout
+
+\begin_layout Subsubsection*
+Historia.
+ Desde Entscheidungsproblem hasta la Tesis Church-Turing
+\end_layout
+
+\begin_layout Standard
+1900 
+\begin_inset Newline newline
+\end_inset
+
+ Hilbert publicó en el Congreso Internacional de Matemáticas de París una
+ lista de veintitrés desafíos matemáticos como desafíos propuestos para
+ el siglo.
+ Eran veinticuatro inicialmente, pero uno de ellos no fue presentado en
+ el congreso, aunque se conserva en los manuscritos de Hilbert.
+ El desafío diez, llamado Entscheidungsproblem, era el que pedía un proceso
+ acorde al cual, dado un polinomio, pueda determinar si posee una raíz entera.
+ O escrito con más precisión, encontrar un algoritmo que determine si una
+ ecuación diofántica polinómica dada con coeficientes enteros tiene solución
+ entera.
+ 
+\begin_inset Newline newline
+\end_inset
+
+ El problema no era resoluble.
+ Pero demostrar su imposibilidad necesitaba una definición formal de algoritmo.
+ Las definiciones intuitivas no bastaban.
+ 
+\begin_inset Newline newline
+\end_inset
+
+ 
+\begin_inset Newline newline
+\end_inset
+
+ 1936 
+\begin_inset Newline newline
+\end_inset
+
+ Alonzo Church y Alan Turing demuestran formalmente el concepto de algoritmo.
+ El primero mediante la invención de el lambda-calculus, el segundo mediante
+ la invención de la máquina de Turing.
+ Ambas definiciones son consideradas equivalentes.
+ Kleene también proveyó una definición formal de algoritmo utilizando funciones
+ recursivas.
+ Ésta demostración también se la considera equivalente a las anteriores.
+ 
+\begin_inset Newline newline
+\end_inset
+
+ 
+\begin_inset Newline newline
+\end_inset
+
+ 1976 
+\begin_inset Newline newline
+\end_inset
+
+ Yuri Matiyasevich, basado en el trabajo de Martin Davis, Hilary Putnam,
+ y Julia Robinson demostró que no existe un algoritmo que cumpla los requisitos
+ de Hilbert.
+\end_layout
+
+\begin_layout Subsubsection*
+Tesis Church-Turing
+\end_layout
+
+\begin_layout Standard
+La tesis de Church, o de Church-Turing, o aquella que generalmente se expresa
+ mediante cualquier otra combinación de nombres de los protagonistas de
+ ese período – excepto, tal vez, Gödel- es aquella propone la equivalencia
+ entre las definiciones de algoritmos provistas por los mismos.
+ 
+\begin_inset Newline newline
+\end_inset
+
+ Cuando decimos que las definiciones de Church, Turing y Kleene se las considera
+ equivalentes, es porque no ha sido posible demostrar su inequivalencia.
+ En la comunidad científica se considera a la proposición de su equivalencia
+ como la Tesis Church-Turing, donde múltiples trabajos exponen cómo lo que
+ es posible expresar mediante los lenguajes propuestos se traduce a los
+ otros.
+ 
+\begin_inset Newline newline
+\end_inset
+
+No es un teorema matemático, es una afirmación formalmente indemostrable,
+ una hipótesis que, no obstante, tiene una aceptación prácticamente universal.
+ 
+\begin_inset Newline newline
+\end_inset
+
+ Asumiendo que la Tesis Church-Turing es verdadera, todo algoritmo puede
+ ser expresado entonces como una máquina de Turing.
+ 
+\end_layout
+
+\begin_layout Standard
+\align center
+"Toda tarea ejecutable de manera efectiva es computable." 
+\begin_inset Newline newline
+\end_inset
+
+ "Cualquier forma de computar el Universo puede simularse con una máquina
+ de Turing" 
+\end_layout
+
+\begin_layout Subsubsection*
+Teoremas de incompletitud de Gödel
+\end_layout
+
+\begin_layout Standard
+El décimo desafío de Hilbert planteó si las matemáticas eran completas,
+ si cada proposición podía ser demostrada o refutada dentro de las matemáticas.
+ 
+\begin_inset Newline newline
+\end_inset
+
+ Gödel teorizó sobre la incompletitud de los sistemas axiomáticos, pero,
+ tras varios intentos, fue Alan Turing quien apoyó esta teoría con la creación
+ de su máquina, minuciosamente ideada para que pudiera interpretar cualquier
+ algoritmo, y que sin embargo tenía problemas fuera de su alcance.
+ Concretizó la definición de algoritmo y luego desarrolló un ejemplo concreto
+ no computable, llamado 
+\shape italic
+The Halting Problem
+\shape default
+.
+\end_layout
+
+\begin_layout Subsubsection*
+Máquina de Turing como estándar
+\end_layout
+
+\begin_layout Standard
+Dado que todo lo computable puede ser expresado como una máquina de Turing,
+ estudiar eficiencia sobre las máquinas de Turing es equivalente a estudiar
+ eficiencia sobre cualquier modelo computacional.
+ 
+\begin_inset Newline newline
+\end_inset
+
+ Ésta es la razón para el estudio de las máquinas de Turing durante el estudio
+ de algoritmos, y en éste caso, para el estudio de la complejidad de los
+ mismos.
+\end_layout
+
+\begin_layout Section
+Máquina de Turing
+\end_layout
+
+\begin_layout Standard
+\begin_inset Quotes eld
+\end_inset
+
+...
+ una ilimitada capacidad de memoria obtenida en la forma de una cinta infinita
+ marcada con cuadrados, en cada uno de los cuales podría imprimirse un símbolo.
+ En cualquier momento hay un símbolo en la máquina; llamado el símbolo leído.
+ La máquina puede alterar el símbolo leído y su comportamiento está en parte
+ determinado por ese símbolo, pero los símbolos en otros lugares de la cinta
+ no afectan el comportamiento de la máquina.
+ Sin embargo, la cinta se puede mover hacia adelante y hacia atrás a través
+ de la máquina, siendo esto una de las operaciones elementales de la máquina.
+ Por lo tanto cualquier símbolo en la cinta puede tener finalmente una oportunid
+ad.
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align right
+Turing (1948, p.
+ 61.)
+\end_layout
+
+\begin_layout Standard
+El anterior texto es una cita traducida al español de un ensayo de Turing
+ llamado 
+\begin_inset Quotes eld
+\end_inset
+
+Máquinas Inteligentes
+\begin_inset Quotes erd
+\end_inset
+
+, realizado en 1948.
+\end_layout
+
+\begin_layout Subsubsection*
+Descripción Informal
+\end_layout
+
+\begin_layout Standard
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "100col%"
+special "none"
+height "1in"
+height_special "totalheight"
+thickness "0.4pt"
+separation "3pt"
+shadowsize "4pt"
+framecolor "black"
+backgroundcolor "none"
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename resources/TM.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\size small
+Aquí se muestra el estado interno (q1) dentro del cabezal, y la ilustración
+ describe la cinta como siendo infinita y llenada previamente con '0', que
+ representa vacío.
+ El estado completo del sistema (su configuración) consiste del estado interno(q
+1), el contenido de las casillas no vacías, ("11B"), y la posición del cabezal
+ relativa a ésas casillas, incluyendo vacíos, i.e.: 
+\begin_inset Quotes eld
+\end_inset
+
+011B
+\begin_inset Quotes erd
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\size footnotesize
+La máquina de Turing modela matemáticamente a una máquina que opera mecánicament
+e sobre una cinta.
+ En esta cinta hay símbolos que la máquina puede leer y escribir, uno a
+ la vez, usando un cabezal lector/escritor de cinta.
+ La operación está completamente determinada por un conjunto finito de instrucci
+ones elementales como 
+\end_layout
+
+\begin_layout Standard
+\align center
+
+\shape slanted
+\size footnotesize
+"en el estado 
+\size small
+42
+\size footnotesize
+, si el símbolo visto es 0, escribe un 1; Si el símbolo visto es 1, cambia
+ al estado 
+\size small
+17
+\size footnotesize
+; en el estado 
+\size small
+17
+\size footnotesize
+, si el símbolo visto es 0, escribe un 1 y cambia al estado 
+\size small
+6
+\size footnotesize
+; etc"
+\shape default
+.
+ 
+\end_layout
+
+\begin_layout Standard
+
+\size footnotesize
+En su artículo (
+\family sans
+"Sobre números computables con una aplicación al Entscheidungsproblem"
+\family default
+), Turing no imagina un mecanismo, sino una persona a la que él llama la
+ "computadora", quien ejecuta servilmente estas reglas mecánicas deterministas
+ (o como Turing pone, "de una manera desganada").
+\end_layout
+
+\begin_layout Standard
+
+\size footnotesize
+Más precisamente, una máquina de Turing consta de:
+\end_layout
+
+\begin_layout Enumerate
+\noindent
+
+\size footnotesize
+Una 
+\series bold
+cinta
+\series default
+ que se divide en celdas, una al lado de la otra.
+ Cada celda contiene un símbolo de algún alfabeto finito.
+ El alfabeto contiene un símbolo especial llamado blanco (aquí escrito como
+ 'B') y uno o más símbolos adicionales.
+ La cinta se supone que es arbitrariamente extensible hacia la izquierda
+ y hacia la derecha, es decir, la máquina de Turing siempre es suministrada
+ con tanta cinta como necesite para su computación.
+ Las celdas que no se hayan escrito previamente se asumen que están rellenas
+ con el símbolo blanco.
+ En algunos modelos la cinta tiene un extremo izquierdo marcado con un símbolo
+ especial; la cinta se extiende o es indefinidamente extensible hacia la
+ derecha.
+ 
+\end_layout
+
+\begin_layout Enumerate
+\noindent
+
+\size footnotesize
+Un 
+\series bold
+cabezal
+\series default
+ que puede leer y escribir símbolos en la cinta y mover la cinta a la izquierda
+ y a la derecha una (y sólo una) celda a la vez.
+ En algunos modelos el cabezal se mueve y la cinta es estacionaria.
+ 
+\end_layout
+
+\begin_layout Enumerate
+\noindent
+
+\size footnotesize
+Un 
+\series bold
+registro de estado
+\series default
+ que almacena el estado de la máquina de Turing, uno de los estados finitos.
+ Hay un estado inicial especial con el que el registro de estado se inicia.
+ Turing escribe que estos estados reemplazan el "estado de la mente" en
+ que ordinariamente estaría una persona realizando cálculos.
+ 
+\end_layout
+
+\begin_layout Enumerate
+\noindent
+
+\size footnotesize
+Una 
+\series bold
+tabla
+\series default
+ finita de instrucciones (llamada ocasionalmente como 
+\series bold
+tabla de acción
+\series default
+ o 
+\series bold
+función de transición
+\series default
+).
+ Las instrucciones son usualmente 5-tuplas: 
+\family sans
+qiaj
+\family default
+→
+\family sans
+qi1aj1dk
+\family default
+, que, dado el estado (
+\family sans
+qi
+\family default
+) en que la máquina se encuentra actualmente y el símbolo (
+\family sans
+aj
+\family default
+) que se está leyendo en la cinta (el símbolo actualmente debajo del cabezal)
+ le indica a la máquina hacer lo siguiente en secuencia: 
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+\noindent
+
+\size footnotesize
+Borra o escribe un símbolo (reemplazando 
+\family sans
+aj
+\family default
+ con 
+\family sans
+aj1
+\family default
+), y 
+\shape slanted
+entonces
+\shape default
+ 
+\end_layout
+
+\begin_layout Itemize
+\noindent
+
+\size footnotesize
+Mueve el cabezal (que es descrito por 
+\family sans
+dk
+\family default
+ y puede tener los valores: 'L' para un paso a la izquierda, o 'R' para
+ un paso a la derecha, o 'N' para permanecer en el mismo lugar) y luego
+ 
+\end_layout
+
+\begin_layout Itemize
+\noindent
+
+\size footnotesize
+Asume el mismo o un nuevo estado como prescrito (ve al estado 
+\family sans
+qi1
+\family default
+).
+ 
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\noindent
+
+\size footnotesize
+Notar que cada parte de la máquina — su estado y colecciones de símbolos
+ — y sus acciones — imprimir, borrar, movimiento de la cinta — es finito,
+ discreto y distinguible; es la cantidad potencialmente ilimitada de cinta
+ lo que le da una cantidad ilimitada de espacio de almacenamiento.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection*
+Descripción Formal
+\end_layout
+
+\begin_layout Standard
+Una máquina de Turing ​es un modelo computacional que realiza una lectura/escrit
+ura de manera automática sobre una entrada llamada cinta, generando una
+ salida en esta misma.
+\end_layout
+
+\begin_layout Standard
+Este modelo está formado por un alfabeto de entrada y uno de salida, un
+ símbolo especial llamado blanco (normalmente b, 
+\begin_inset Formula $\triangleright$
+\end_inset
+
+, o 
+\begin_inset Formula $\ensuremath{\O}$
+\end_inset
+
+), un conjunto de estados finitos y un conjunto de transiciones entre dichos
+ estados.
+ 
+\end_layout
+
+\begin_layout Standard
+Su funcionamiento se basa en una función de transición, que recibe un estado
+ inicial y una cadena de caracteres (la cinta, la cual puede ser infinita)
+ pertenecientes al alfabeto de entrada.
+ La máquina va leyendo una celda de la cinta en cada paso, borrando el símbolo
+ en el que se encuentra posicionado su cabezal y escribiendo un nuevo símbolo
+ perteneciente al alfabeto de salida, para luego desplazar el cabezal a
+ la izquierda o a la derecha (solo una celda a la vez).
+ 
+\end_layout
+
+\begin_layout Standard
+Esto se repite según se indique en la función de transición, para finalmente
+ detenerse en un estado final o de aceptación, representando así la salida.
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Una máquina de Turing con una sola cinta puede definirse como una 7-tupla
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\mathcal{M}$
+\end_inset
+
+= (Q, 
+\begin_inset Formula $\Sigma$
+\end_inset
+
+, 
+\begin_inset Formula $\Gamma,$
+\end_inset
+
+s, b, F, 
+\begin_inset Formula $\delta)$
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+donde:
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Q 
+\size scriptsize
+es un conjunto finito de estados
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\begin_inset Formula $\Sigma$
+\end_inset
+
+ 
+\family default
+\series default
+\shape default
+\size scriptsize
+\emph default
+\bar default
+\strikeout default
+\xout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+es un conjunto finito de símbolos distinto de blanco, denominado alfabeto
+ de entrada.
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\Gamma$
+\end_inset
+
+ 
+\size scriptsize
+es un conjunto finito de símbolos de cinta, denominado alfabeto de cinta
+\size default
+ 
+\size scriptsize
+(
+\size default
+
+\begin_inset Formula $\Sigma$
+\end_inset
+
+ 
+\begin_inset Formula $\subseteq$
+\end_inset
+
+ 
+\begin_inset Formula $\Gamma$
+\end_inset
+
+
+\size scriptsize
+).
+ 
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+s
+\begin_inset Formula $\in$
+\end_inset
+
+ Q 
+\size scriptsize
+es el estado inicial.
+ 
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+b
+\begin_inset Formula $\in$
+\end_inset
+
+ 
+\begin_inset Formula $\Gamma$
+\end_inset
+
+ 
+\size scriptsize
+es un símbolo denominado blanco,
+\end_layout
+
+\begin_layout Standard
+
+\size scriptsize
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+es el único símbolo que se puede repetir un número infinito de veces.
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+F
+\begin_inset Formula $\subseteq$
+\end_inset
+
+Q 
+\size scriptsize
+es el conjunto de estados finales de aceptación.
+ 
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\delta$
+\end_inset
+
+ :Q
+\begin_inset Formula $\times$
+\end_inset
+
+
+\begin_inset Formula $\Gamma$
+\end_inset
+
+ 
+\begin_inset Formula $\rightarrow$
+\end_inset
+
+ Q
+\begin_inset Formula $\times$
+\end_inset
+
+
+\begin_inset Formula $\Gamma$
+\end_inset
+
+
+\begin_inset Formula $\times$
+\end_inset
+
+ {L,R} 
+\end_layout
+
+\begin_layout Standard
+
+\size scriptsize
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+es una función parcial denominada función de transición, 
+\end_layout
+
+\begin_layout Standard
+
+\size scriptsize
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+siendo L es un movimiento a la izquierda y R es el movimiento a la derecha.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Ejemplo concreto de una Máquina de Turing
+\end_layout
+
+\begin_layout Standard
+Una máquina de Turing sencilla podría ser aquella que determinase, dada
+ una secuencia de letras, si es posible invertirla de manera tal que conserve
+ su valor original.
+ Dicho de otra manera, que determine si una frase es un palíndromo.
+\end_layout
+
+\begin_layout Standard
+A ésta máquina de Turing la llamaremos 
+\begin_inset Formula $\mathcal{M}_{\text{Pal}}$
+\end_inset
+
+.
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Suponiendo que tenemos dos cintas, usaremos la primera para ingresar el
+ input y la segunda para procesarlo.
+\end_layout
+
+\begin_layout Standard
+Una tercer cinta será usada para escribir el output del algoritmo computado.
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Mover el cabezal en la primer cinta hasta alcanzar el final de datos ingresados.
+\end_layout
+
+\begin_layout Enumerate
+Comenzar a leer hacia atrás, hasta el comienzo de los datos ingresados.
+\end_layout
+
+\begin_layout Enumerate
+En cada paso hacia la izquierda, escribir los símbolos en la segunda cinta,
+ hasta llegar al comienzo de los datos ingresados.
+ Ésto efectivamente va a escribir los datos en la segunda cinta de manera
+ invertida.
+\end_layout
+
+\begin_layout Enumerate
+Mover ambos cabezales hasta el comienzo.
+ 
+\end_layout
+
+\begin_layout Enumerate
+Comenzar a leer hacia adelante, con ambos cabezales.
+\end_layout
+
+\begin_layout Enumerate
+En cada paso hacia la derecha, comparar los valores de cada cabezal:
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Si los símbolos son diferentes, el input no es un palíndromo, y se escribe
+ se termina la ejecución, escribiendo en la cinta de output un valor que
+ represente a el símbolo halt-reject.
+ Usualmente se lo representa con un cero.
+\end_layout
+
+\begin_layout Itemize
+Si los símbolos son iguales, el input puede ser un palíndromo, y se continúa
+ avanzando.
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Si se alcanza el fin de las cintas, se termina la ejecución, escribiendo
+ en la cinta de output un valor que represente a el símbolo halt-accept
+ Usualmente se lo representa con un uno.
+\end_layout
+
+\end_deeper
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+maybe add a graph representation of 
+\begin_inset Formula $\mathcal{M}_{\text{Pal}}$
+\end_inset
+
+ as a state machine 
+\shape slanted
+here
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\end_layout
+
+\end_body
+\end_document
