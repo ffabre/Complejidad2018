@@ -1,0 +1,5 @@
+Clase   Autor
+1       Miguel Lemos
+2       Pablo Ventura
+3       Facundo Fabre
+4       Ignacio Made
